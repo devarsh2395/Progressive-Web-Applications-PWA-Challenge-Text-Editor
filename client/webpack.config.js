@@ -11,18 +11,71 @@ module.exports = () => {
     mode: 'development',
     entry: {
       main: './src/js/index.js',
-      install: './src/js/install.js'
+      install: './src/js/install.js',
+      cards: './src/js/cards.js'
     },
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
+      new HtmlWebpackPlugin ({
+        template: './src/index.html',
+        filename: 'index.html',
+        chunks:['main']
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/install.html',
+        filename: 'install.html',
+        chunks: ['install']
+      }),
+
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js',
+      }),
+      new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
+        name: 'Jate- Just Another Text Editor',
+        short_name: "Jate",
+        description: 'A simple and powerful text editor',
+        background_color: "#000",
+        theme_color: "#fff",
+        start_url: './',
+        publicPath: './',
+        icons: [
+          {
+            src: path.resolve('./src/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assets', 'icons'),
+          },
+        ],
       
+      }),
+     
     ],
 
+
     module: {
+      // CSS loaders
       rules: [
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          // We use babel-loader in order to use ES6.
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
+            },
+          },
+        },
         
       ],
     },
