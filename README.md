@@ -4,7 +4,9 @@
 
 ## Description
 
+JATE is a web app that lets developers create and store notes or code snippets offline or online. It uses a client-server folder structure and starting it up involves running 'npm run start' from the root directory. JATE is built with next-gen JavaScript and uses IndexedDB to store content, which is automatically retrieved when the editor is reopened. It also offers the option to download the app as an icon on the desktop and pre-caches static assets with a registered service worker upon loading.
 
+![Homepage](./assets/images/homepage-image.png)
 
 ## User Story
 
@@ -59,7 +61,7 @@ npm install
 
 ## Usage
 
-Below is the link to the [Deployed Web Application]()
+Below is the link to the [Deployed Web Application](https://pwa-web-app-devarsh.herokuapp.com/)
 
 
 ## Contributing
