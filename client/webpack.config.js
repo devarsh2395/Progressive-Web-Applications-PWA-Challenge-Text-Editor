@@ -12,7 +12,6 @@ module.exports = () => {
     entry: {
       main: './src/js/index.js',
       install: './src/js/install.js',
-      cards: './src/js/cards.js'
     },
     output: {
       filename: '[name].bundle.js',
@@ -20,33 +19,27 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin ({
-        template: './src/index.html',
-        filename: 'index.html',
-        chunks:['main']
-      }),
-      new HtmlWebpackPlugin({
-        template: './src/install.html',
-        filename: 'install.html',
-        chunks: ['install']
+        template: './index.html',
+        title: 'JATE',
       }),
 
       new InjectManifest({
         swSrc: './src-sw.js',
-        swDest: 'service-worker.js',
+        swDest: 'src-sw.js',
       }),
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
-        name: 'Jate- Just Another Text Editor',
+        name: 'Jate - Just Another Text Editor',
         short_name: "Jate",
         description: 'A simple and powerful text editor',
-        background_color: "#000",
-        theme_color: "#fff",
-        start_url: './',
-        publicPath: './',
+        background_color: "#225ca3",
+        theme_color: "#225ca3",
+        start_url: '/',
+        publicPath: '/',
         icons: [
           {
-            src: path.resolve('./src/images/logo.png'),
+            src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
           },
